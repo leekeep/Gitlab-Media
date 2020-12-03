@@ -16,6 +16,7 @@ import io.jboot.web.controller.JbootController;
 @Path(value = "/", viewPath = "/index")
 public class IndexController extends JbootController {
 	public void index() {
+		System.out.println(getIPAddress());
 		render("index.html");
 	}
 	
