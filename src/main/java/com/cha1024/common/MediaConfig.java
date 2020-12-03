@@ -14,6 +14,7 @@ import com.jfinal.config.Interceptors;
 import com.jfinal.config.JFinalConfig;
 import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
+import com.jfinal.kit.LogKit;
 import com.jfinal.kit.Prop;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
@@ -124,7 +125,7 @@ public class MediaConfig extends JFinalConfig {
 			//订阅消息
 			MqttKit.sub("raspberry/topic", MqttKit.QOS_AT_LEAST_ONCE, new IMqttMessageListener() {
 				public void messageArrived(String topic, MqttMessage message) throws Exception {
-					System.out.println("主题:" + topic + "\t" + new String(message.getPayload()));
+					LogKit.warn("主题:" + topic + "\t" + new String(message.getPayload()));
 				}
 			});
 		} catch (MqttPersistenceException e) {
