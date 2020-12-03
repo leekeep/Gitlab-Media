@@ -1,4 +1,4 @@
-package com.demo.wxrobot.dto;
+package com.cha1024.wxrobot.dto;
 
 public class PassiveGroupMsgDto {
 

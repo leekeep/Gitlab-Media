@@ -1,10 +1,10 @@
-package com.demo.blog;
+package com.cha1024.blog;
 
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Inject;
 import com.jfinal.core.Controller;
 import com.jfinal.core.Path;
-import com.demo.common.model.Blog;
+import com.cha1024.common.model.Blog;
 
 /**
  * 本 demo 仅表达最为粗浅的 jfinal 用法，更为有价值的实用的企业级用法

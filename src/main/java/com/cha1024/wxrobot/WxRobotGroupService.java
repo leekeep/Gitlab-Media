@@ -1,11 +1,11 @@
-package com.demo.wxrobot;
+package com.cha1024.wxrobot;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.math.NumberUtils;
 
-import com.demo.wxrobot.dto.PassiveGroupMsgDto;
+import com.cha1024.wxrobot.dto.PassiveGroupMsgDto;
 import com.jfinal.kit.StrKit;
 
 /**

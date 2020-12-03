@@ -1,4 +1,4 @@
-package com.demo.player;
+package com.cha1024.player;
 
 import com.jfinal.aop.Inject;
 import com.jfinal.core.Path;

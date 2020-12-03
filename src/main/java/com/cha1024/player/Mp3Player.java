@@ -1,4 +1,4 @@
-package com.demo.player;
+package com.cha1024.player;
 
 import java.io.BufferedInputStream;
 import java.io.File;

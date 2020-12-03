@@ -1,4 +1,4 @@
-package com.demo.common.model;
+package com.cha1024.common.model;
 
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 

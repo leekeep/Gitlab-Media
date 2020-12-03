@@ -1,11 +1,11 @@
-package com.demo.wxrobot;
+package com.cha1024.wxrobot;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
-import com.demo.wxrobot.dto.PassiveGroupMsgDto;
+import com.cha1024.wxrobot.dto.PassiveGroupMsgDto;
 import com.jfinal.aop.Inject;
 import com.jfinal.core.Path;
 import com.jfinal.kit.HttpKit;

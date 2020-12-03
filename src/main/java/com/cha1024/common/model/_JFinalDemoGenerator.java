@@ -1,7 +1,7 @@
-package com.demo.common.model;
+package com.cha1024.common.model;
 
 import javax.sql.DataSource;
-import com.demo.common.DemoConfig;
+import com.cha1024.common.MediaConfig;
 import com.jfinal.kit.PathKit;
 import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.activerecord.generator.Generator;
@@ -16,19 +16,19 @@ import com.jfinal.plugin.druid.DruidPlugin;
 public class _JFinalDemoGenerator {
 	
 	public static DataSource getDataSource() {
-		DruidPlugin druidPlugin = DemoConfig.createDruidPlugin();
+		DruidPlugin druidPlugin = MediaConfig.createDruidPlugin();
 		druidPlugin.start();
 		return druidPlugin.getDataSource();
 	}
 	
 	public static void main(String[] args) {
 		// base model 所使用的包名
-		String baseModelPackageName = "com.demo.common.model.base";
+		String baseModelPackageName = "com.cha1024.common.model.base";
 		// base model 文件保存路径
-		String baseModelOutputDir = PathKit.getWebRootPath() + "/src/main/java/com/demo/common/model/base";
+		String baseModelOutputDir = PathKit.getWebRootPath() + "/src/main/java/com/cha1024/common/model/base";
 		
 		// model 所使用的包名 (MappingKit 默认使用的包名)
-		String modelPackageName = "com.demo.common.model";
+		String modelPackageName = "com.cha1024.common.model";
 		// model 文件保存路径 (MappingKit 与 DataDictionary 文件默认保存路径)
 		String modelOutputDir = baseModelOutputDir + "/..";
 		

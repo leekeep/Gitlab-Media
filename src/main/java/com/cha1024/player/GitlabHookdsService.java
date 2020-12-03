@@ -1,4 +1,4 @@
-package com.demo.player;
+package com.cha1024.player;
 
 import java.io.File;
 
@@ -87,7 +87,7 @@ public class GitlabHookdsService {
 			LogKit.info(userName + "提交了代码");
 			WavPlayer wavePlayer = new WavPlayer(filePath);
 			wavePlayer.start();
-			pushToQyWx("代码提交通知", userName, comment, projectName, codeUrl, ref);
+//			pushToQyWx("代码提交通知", userName, comment, projectName, codeUrl, ref);
 		}else if("repository_update".equalsIgnoreCase(eventName)) {
 			LogKit.info(userName + " 合并了仓库");
 			String fileUrl = System.getProperty("user.home") + File.separatorChar + "voice" + File.separatorChar + "1016.wav";

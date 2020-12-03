@@ -1,6 +1,13 @@
-package com.demo.common;
+package com.cha1024.common;
 
-import com.demo.common.model._MappingKit;
+import org.eclipse.paho.client.mqttv3.IMqttMessageListener;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.eclipse.paho.client.mqttv3.MqttPersistenceException;
+
+import com.cha1024.common.model._MappingKit;
+import com.cha1024.ext.plugin.mqtt.MqttKit;
+import com.cha1024.ext.plugin.mqtt.MqttPlugin;
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
 import com.jfinal.config.Interceptors;
@@ -20,7 +27,7 @@ import com.jfinal.template.Engine;
  * 
  * API 引导式配置
  */
-public class DemoConfig extends JFinalConfig {
+public class MediaConfig extends JFinalConfig {
 	
 	static Prop p;
 	
@@ -28,7 +35,7 @@ public class DemoConfig extends JFinalConfig {
 	 * 启动入口，运行此 main 方法可以启动项目，此 main 方法可以放置在任意的 Class 类定义中，不一定要放于此
 	 */
 	public static void main(String[] args) {
-		UndertowServer.start(DemoConfig.class);
+		UndertowServer.start(MediaConfig.class);
 	}
 	
 	/**
@@ -64,7 +71,7 @@ public class DemoConfig extends JFinalConfig {
 	 */
 	public void configRoute(Routes me) {
 		// 使用 jfinal 4.9.03 新增的路由扫描功能
-		me.scan("com.demo.");
+		me.scan("com.cha1024.");
 	}
 	
 	public void configEngine(Engine me) {
@@ -85,6 +92,9 @@ public class DemoConfig extends JFinalConfig {
 		// 所有映射在 MappingKit 中自动化搞定
 		_MappingKit.mapping(arp);
 		me.add(arp);
+		
+		MqttPlugin mqttPlugin = new MqttPlugin("mqtt.properties");
+		me.add(mqttPlugin);
 	}
 	
 	public static DruidPlugin createDruidPlugin() {
@@ -104,6 +114,24 @@ public class DemoConfig extends JFinalConfig {
 	 * 配置处理器
 	 */
 	public void configHandler(Handlers me) {
+		
+	}
+	
+	@Override
+	public void onStart() {
+		try {
+//			MqttKit.pub("raspberry/topic", "hello".getBytes(), MqttKit.QOS_AT_LEAST_ONCE, false);
+			//订阅消息
+			MqttKit.sub("raspberry/topic", MqttKit.QOS_AT_LEAST_ONCE, new IMqttMessageListener() {
+				public void messageArrived(String topic, MqttMessage message) throws Exception {
+					System.out.println("主题:" + topic + "\t" + new String(message.getPayload()));
+				}
+			});
+		} catch (MqttPersistenceException e) {
+			e.printStackTrace();
+		} catch (MqttException e) {
+			e.printStackTrace();
+		}
 		
 	}
 }

@@ -1,6 +1,6 @@
-package com.demo.common.model;
+package com.cha1024.common.model;
 
-import com.demo.common.model.base.BaseBlog;
+import com.cha1024.common.model.base.BaseBlog;
 
 /**
  * 本 demo 仅表达最为粗浅的 jfinal 用法，更为有价值的实用的企业级用法

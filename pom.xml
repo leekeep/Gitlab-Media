@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	
-	<groupId>com.demo</groupId>
+	<groupId>com.cha1024</groupId>
 	<artifactId>Cha-Media</artifactId>
 	<version>4.9.03</version>
 	<packaging>jar</packaging>
@@ -78,6 +78,13 @@
 		    <groupId>javazoom</groupId>
 		    <artifactId>jlayer</artifactId>
 		    <version>1.0.1</version>
+		</dependency>
+		
+		<!-- mqtt -->
+		<dependency>
+		    <groupId>org.eclipse.paho</groupId>
+		    <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
+		    <version>1.2.5</version>
 		</dependency>
 		
 		<!-- cos 文件上传 -->
