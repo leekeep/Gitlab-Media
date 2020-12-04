@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd"
+	updateCheck="false" monitoring="autodetect"
+	dynamicConfig="true">
+	<!--timeToIdleSeconds 当缓存闲置n秒后销毁 --> 
+	<!--timeToLiveSeconds 当缓存存活n秒后销毁 --> 
+	<!-- 
+		缓存配置 
+		   name:缓存名称。 
+		   maxElementsInMemory：缓存最大个数。 
+		   eternal:对象是否永久有效，一但设置了，timeout将不起作用。 
+		   timeToIdleSeconds：当对象自从最近一次被访问后，如果处于空闲状态的时间超过了timeToIdleSeconds属性值，这个对象就会过期，EHCache将把它从缓存中清空；即缓存被创建后，最后一次访问时间到缓存失效之时，两者之间的间隔，单位为秒(s)。仅当eternal=false对象不是永久有效时使用，可选属性，默认值是0，也就是可闲置时间无穷大。 
+		   timeToLiveSeconds：当对象自从被存放到缓存中后，如果处于缓存中的时间超过了 timeToLiveSeconds属性值,这个对象就会过期，EHCache将把它从缓存中清除；即缓存自创建日期起能够存活的最长时间，单位为秒(s)。仅当eternal=false对象不是永久有效时使用，默认是0.，也就是对象存活时间无穷大。 
+		   overflowToDisk：当内存中对象数量达到maxElementsInMemory时，Ehcache将会对象写到磁盘中。 
+		   diskSpoolBufferSizeMB：这个参数设置DiskStore（磁盘缓存）的缓存区大小。默认是30MB。每个Cache都应该有自己的一个缓冲区。 
+		   maxElementsOnDisk：硬盘最大缓存个数。 
+		   diskPersistent：是否缓存虚拟机重启期数据 Whether the disk store persists between restarts of the Virtual Machine. The default value is false. 
+		   diskExpiryThreadIntervalSeconds：磁盘失效线程运行时间间隔，默认是120秒。 
+		   memoryStoreEvictionPolicy：当达到maxElementsInMemory限制时，Ehcache将会根据指定的策略去清理内存。默认策略是LRU（最近最少使用）。你可以设置为FIFO（先进先出）或是LFU（较少使用）。 
+		   clearOnFlush：内存数量最大时是否清除。 
+	-->
+	<!-- 磁盘缓存位置 -->
+    <diskStore path="java.io.tmpdir"/>
+    <!--默认缓存-->
+	<defaultCache
+		maxEntriesLocalHeap="1000000"
+		eternal="false"
+		overflowToDisk="true"
+		timeToIdleSeconds="300"
+		timeToLiveSeconds="60">
+	</defaultCache>
+    
+	<!-- 缓存半小时 -->
+	<cache name="half-hour"
+		maxElementsInMemory="10000"
+		maxElementsOnDisk="100000"
+		eternal="false"
+		timeToIdleSeconds="1800"
+		timeToLiveSeconds="0"
+		overflowToDisk="true"
+		diskPersistent="true"
+		/>
+	<!-- 缓存一分钟 -->
+	<cache name="one-min"
+		maxElementsInMemory="10000"
+		maxElementsOnDisk="100000"
+		eternal="false"
+		timeToIdleSeconds="60"
+		timeToLiveSeconds="0"
+		overflowToDisk="true"
+		diskPersistent="true"
+		/>
+	<!-- 缓存十分钟 -->
+	<cache name="ten-min"
+		maxElementsInMemory="10000"
+		maxElementsOnDisk="100000"
+		eternal="false"
+		timeToIdleSeconds="600"
+		timeToLiveSeconds="0"
+		overflowToDisk="true"
+		diskPersistent="true"
+		/>
+</ehcache>
