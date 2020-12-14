@@ -3,10 +3,13 @@ package com.cha1024.player;
 import java.io.File;
 
 import org.apache.commons.lang3.RandomUtils;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttPersistenceException;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.cha1024.ext.plugin.mqtt.MqttKit;
 import com.jfinal.kit.HttpKit;
 import com.jfinal.kit.LogKit;
 import com.jfinal.kit.StrKit;
@@ -54,6 +57,23 @@ public class GitlabHookdsService {
 		HttpKit.post(url, data);
 	}
 	/**
+	 * 推送消息到LCD屏幕
+	 * @param username
+	 * @param action
+	 * @param ref
+	 */
+	private void pushToLCD(String username, String action, String ref) {
+		String topic = "raspberry/topic";
+		String payload = username + "  " + action + "  " + ref;
+		try {
+			MqttKit.pub(topic, payload.getBytes(), 0, false, 60);
+		} catch (MqttPersistenceException e) {
+			e.printStackTrace();
+		} catch (MqttException e) {
+			e.printStackTrace();
+		}
+	}
+	/**
 	 * 处理消息钩子发送的内容
 	 * @param jsonBody
 	 */
@@ -88,6 +108,7 @@ public class GitlabHookdsService {
 			WavPlayer wavePlayer = new WavPlayer(filePath);
 			wavePlayer.start();
 //			pushToQyWx("代码提交通知", userName, comment, projectName, codeUrl, ref);
+			pushToLCD(userName, eventName, ref);
 		}else if("repository_update".equalsIgnoreCase(eventName)) {
 			LogKit.info(userName + " 合并了仓库");
 			String fileUrl = System.getProperty("user.home") + File.separatorChar + "voice" + File.separatorChar + "1016.wav";
