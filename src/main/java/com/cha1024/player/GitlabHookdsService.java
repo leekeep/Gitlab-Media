@@ -64,6 +64,7 @@ public class GitlabHookdsService {
 	 */
 	private void pushToLCD(String username, String action, String ref) {
 		String topic = "raspberry/topic";
+		ref = ref.replace("refs/heads/", "");
 		String payload = username + "  " + action + "  " + ref;
 		try {
 			MqttKit.pub(topic, payload.getBytes(), 0, false, 60);
