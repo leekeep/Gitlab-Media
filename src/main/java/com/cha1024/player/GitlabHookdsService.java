@@ -9,7 +9,9 @@ import org.eclipse.paho.client.mqttv3.MqttPersistenceException;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.cha1024.airobot.BaiduAiService;
 import com.cha1024.ext.plugin.mqtt.MqttKit;
+import com.jfinal.aop.Inject;
 import com.jfinal.kit.HttpKit;
 import com.jfinal.kit.LogKit;
 import com.jfinal.kit.StrKit;
@@ -20,6 +22,9 @@ import com.jfinal.kit.StrKit;
  *
  */
 public class GitlabHookdsService {
+	
+	@Inject
+	BaiduAiService baiduAiService;
 	/**
 	 * 用户的home目录
 	 */
@@ -110,14 +115,18 @@ public class GitlabHookdsService {
 			wavePlayer.start();
 //			pushToQyWx("代码提交通知", userName, comment, projectName, codeUrl, ref);
 			pushToLCD(userName, eventName, ref);
+			String content = userName + " 提交了代码，注释：" + comment;
+			baiduAiService.playAiTextVoice(content);
 		}else if("repository_update".equalsIgnoreCase(eventName)) {
 			LogKit.info(userName + " 合并了仓库");
 			String fileUrl = System.getProperty("user.home") + File.separatorChar + "voice" + File.separatorChar + "1016.wav";
 			WavPlayer wavePlayer = new WavPlayer(fileUrl);
 			wavePlayer.start();
 			//pushToQyWx("仓库更新通知", userName, comment, projectName, codeUrl, ref);
+			String content = userName + " 合并了仓库，注释：" + comment;
+			baiduAiService.playAiTextVoice(content);
 		}
 		return "success";
 	}
-
+	
 }
