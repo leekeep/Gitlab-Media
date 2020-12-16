@@ -110,21 +110,23 @@ public class GitlabHookdsService {
 		}
 		comment = StrKit.defaultIfBlank(comment, "无");
 		if("push".equalsIgnoreCase(eventName)) {
+			String content = userName + " 提交了代码，注释：" + comment;
+			baiduAiService.playAiTextVoice(content);
+			
 			LogKit.info(userName + "提交了代码");
 			WavPlayer wavePlayer = new WavPlayer(filePath);
 			wavePlayer.start();
 //			pushToQyWx("代码提交通知", userName, comment, projectName, codeUrl, ref);
 			pushToLCD(userName, eventName, ref);
-			String content = userName + " 提交了代码，注释：" + comment;
-			baiduAiService.playAiTextVoice(content);
 		}else if("repository_update".equalsIgnoreCase(eventName)) {
+			String content = userName + " 合并了仓库，注释：" + comment;
+			baiduAiService.playAiTextVoice(content);
+			
 			LogKit.info(userName + " 合并了仓库");
 			String fileUrl = System.getProperty("user.home") + File.separatorChar + "voice" + File.separatorChar + "1016.wav";
 			WavPlayer wavePlayer = new WavPlayer(fileUrl);
 			wavePlayer.start();
 			//pushToQyWx("仓库更新通知", userName, comment, projectName, codeUrl, ref);
-			String content = userName + " 合并了仓库，注释：" + comment;
-			baiduAiService.playAiTextVoice(content);
 		}
 		return "success";
 	}
