@@ -111,7 +111,7 @@ public class GitlabHookdsService {
 		comment = StrKit.defaultIfBlank(comment, "无");
 		if("push".equalsIgnoreCase(eventName)) {
 			String content = userName + " 提交了代码，注释：" + comment;
-			baiduAiService.playAiTextVoice(content);
+			baiduAiService.playAiTextVoice(content, false);
 			
 			LogKit.info(userName + "提交了代码");
 			WavPlayer wavePlayer = new WavPlayer(filePath);
@@ -120,7 +120,7 @@ public class GitlabHookdsService {
 			pushToLCD(userName, eventName, ref);
 		}else if("repository_update".equalsIgnoreCase(eventName)) {
 			String content = userName + " 合并了仓库，注释：" + comment;
-			baiduAiService.playAiTextVoice(content);
+			baiduAiService.playAiTextVoice(content, false);
 			
 			LogKit.info(userName + " 合并了仓库");
 			String fileUrl = System.getProperty("user.home") + File.separatorChar + "voice" + File.separatorChar + "1016.wav";

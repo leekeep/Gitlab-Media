@@ -93,11 +93,15 @@ public class BaiduAiService {
 	 * @param content
 	 * @return
 	 */
-	public boolean playAiTextVoice(String content) {
+	public boolean playAiTextVoice(String content, boolean syn) {
 		String voiceFilePath = aiText2Voice(content);
 		if (StrKit.notBlank(voiceFilePath)) {
 			Thread thread = new Thread(new Mp3Player(voiceFilePath));
-			thread.start();
+			if(syn) {
+				thread.start();
+			}else {
+				thread.run();
+			}
 			return true;
 		}
 		return false;

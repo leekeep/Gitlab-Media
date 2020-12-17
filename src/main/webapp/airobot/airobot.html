@@ -38,7 +38,7 @@
 					</form>
 				</div>
 				<div class="col-md-4">
-					 
+					<p id="p_show_content" class="text-success"></p>
 				</div>
 			</div>
 		</div>
@@ -69,8 +69,8 @@
 			var that = this;
 			$(that).attr("disabled", "disabled");
 			$.post("/airobot/playRandomTiangou",function(result){
-				console.info(result);
-				$(that).removeAttr("disabled");
+				$("#p_show_content").html(result);
+				setTimeout(function(){$(that).removeAttr("disabled");}, 30000);
 			});
 		});
 	});

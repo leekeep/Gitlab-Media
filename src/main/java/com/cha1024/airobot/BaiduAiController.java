@@ -2,7 +2,6 @@ package com.cha1024.airobot;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.cha1024.player.Mp3Player;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Inject;
 import com.jfinal.core.Path;
@@ -31,7 +30,7 @@ public class BaiduAiController extends JbootController {
 	@Before(POST.class)
 	public void playByText() {
 		String content = getPara("content");
-		boolean playResult = baiduAiService.playAiTextVoice(content);
+		boolean playResult = baiduAiService.playAiTextVoice(content, true);
 		if (playResult) {
 			renderText("success");
 		} else {
@@ -47,9 +46,9 @@ public class BaiduAiController extends JbootController {
 		if(StrKit.notBlank(jsonStr)) {
 			JSONObject jsonObject = JSON.parseObject(jsonStr);
 			String content = jsonObject.getString("text");
-			boolean playResult = baiduAiService.playAiTextVoice(content);
+			boolean playResult = baiduAiService.playAiTextVoice(content, true);
 			if (playResult) {
-				renderText("success");
+				renderText(content);
 			} else {
 				renderError(500);
 			}
